@@ -4,7 +4,11 @@ import Constants from 'expo-constants';
 
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL || Constants.expoConfig?.extra?.apiUrl || 'http://localhost:3000/api/v1';
 
-const client = axios.create({ baseURL: BASE_URL, timeout: 10000 });
+const client = axios.create({
+  baseURL: BASE_URL,
+  timeout: 10000,
+  headers: { 'bypass-tunnel-reminder': 'true' },
+});
 
 // Injecte le token JWT dans chaque requête
 client.interceptors.request.use(async (config) => {
